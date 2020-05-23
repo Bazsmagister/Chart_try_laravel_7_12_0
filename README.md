@@ -46,3 +46,7 @@ touch chart.blade.php
 # web.php
 
 Route::resource('user', 'UserController');
+
+composer require laravel/ui
+
+php artisan ui:auth

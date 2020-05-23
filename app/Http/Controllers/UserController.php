@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -20,19 +22,21 @@ class UserController extends Controller
 
     public function chart()
     {
-        $userId = Auth::user()->user_id;
+        // $userId = Auth::user()->user_id;
 
         //or
 
         $userId = Auth::user()->id;
 
         // $userEmployee = Auth::user()->employee_id;
-        $userJoined = Auth::user()->created_at;
+        // $userJoined = Auth::user()->created_at;
+        // $userJoined = Auth::user()->created_at;
+
 
 
         // All Joins
         $user_joined = User::select(DB::raw("COUNT(created_at) as count"))
-        ->where('user_id', $userId)
+        // ->where('id', $userId)
         ->whereYear('created_at', date('Y'))
         ->orderBy(DB::raw("MONTH(created_at)"), 'ASC')
         ->groupBy(DB::raw("MONTH(created_at)"))

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 class UserSeeder extends Seeder
 {
@@ -11,6 +12,14 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\User::class, 100)->create();
+        \App\User::create([
+        "name" =>"admin",
+        "email" => "admin@admin.com",
+        "password" => bcrypt("adminadmin"),
+        "created_at" => "yesterday",
+
+        ]);
+
+        factory(\App\User::class, 99)->create();
     }
 }

@@ -25,16 +25,14 @@
     <script>
         let month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-        let data_all_leaves = <?php echo $allEmployeeLeaves; ?>;
-        let data_user_joined = <?php echo $userJoined; ?>;
-
-
+        let data_user_joined = <?php echo $user_joined; ?>;
+        // let data_userJoined = <?php echo $user_joined; ?>;
 
 
         var barChartData = {
             labels: month,
             datasets: [{
-                label: 'All Leave Requests',
+                label: 'All Joins',
                 backgroundColor: "#f56954",
                 data: data_user_joined
             }]

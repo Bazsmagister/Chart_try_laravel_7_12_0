@@ -13,7 +13,8 @@
         <ul>
             @foreach($users as $user)
             <li>
-                {{$user->name}}
+                {{$user->name}} ||
+                {{$user->created_at}}
                 <hr>
             </li>
             @endforeach
@@ -21,7 +22,8 @@
     </div>
 
 
-    {{$user}}
+    {{-- {{$user}} --}}
+
 </body>
 
 </html>

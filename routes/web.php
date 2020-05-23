@@ -20,3 +20,7 @@ Route::get('/', function () {
 Route::get('/chart', 'UserController@chart')->name('chart');
 
 Route::resource('user', 'UserController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
