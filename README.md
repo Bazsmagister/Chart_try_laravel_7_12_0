@@ -50,3 +50,18 @@ Route::resource('user', 'UserController');
 composer require laravel/ui
 
 php artisan ui:auth
+
+# Chart
+
+We can create
+
+line chart,
+
+bar chart
+pie chart using charts in Laravel.
+
+radar
+doughnut
+bubble //didn't worked for me for some reason
+scatter //didn't worked for me for some reason
+polaArea

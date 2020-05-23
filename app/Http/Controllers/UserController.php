@@ -26,7 +26,7 @@ class UserController extends Controller
 
         //or
 
-        $userId = Auth::user()->id;
+        //$userId = Auth::user()->id;
 
         // $userEmployee = Auth::user()->employee_id;
         // $userJoined = Auth::user()->created_at;
