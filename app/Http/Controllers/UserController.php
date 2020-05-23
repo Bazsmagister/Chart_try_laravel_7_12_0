@@ -22,22 +22,13 @@ class UserController extends Controller
 
     public function chart()
     {
-        // $userId = Auth::user()->user_id;
-
-        //or
-
-        //$userId = Auth::user()->id;
-
-        // $userEmployee = Auth::user()->employee_id;
-        // $userJoined = Auth::user()->created_at;
-        // $userJoined = Auth::user()->created_at;
-
-
 
         // All Joins
         $user_joined = User::select(DB::raw("COUNT(created_at) as count"))
-        // ->where('id', $userId)
-        ->whereYear('created_at', date('Y'))
+
+        // ->whereYear('created_at', date('Y'))
+        ->whereYear('created_at', YEAR('2019'))
+
         ->orderBy(DB::raw("MONTH(created_at)"), 'ASC')
         ->groupBy(DB::raw("MONTH(created_at)"))
         ->get()->toArray();
