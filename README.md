@@ -42,3 +42,7 @@ php artisan make:controller UserController --resource
 # \resources\view
 
 touch chart.blade.php
+
+# web.php
+
+Route::resource('user', 'UserController');

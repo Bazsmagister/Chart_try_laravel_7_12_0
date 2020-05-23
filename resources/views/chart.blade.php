@@ -13,7 +13,7 @@
         <div id="card">
             <div class="card-body">
                 <div class="chart">
-                    <canvas id="leaveBarChart"
+                    <canvas id="UserJoinedBarChart"
                         style="min-height: 250px; height: 450px; max-height: 500px; max-width: 100%;"></canvas>
                 </div>
             </div>
@@ -26,9 +26,9 @@
         let month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
         let data_all_leaves = <?php echo $allEmployeeLeaves; ?>;
+        let data_user_joined = <?php echo $userJoined; ?>;
 
-        let data_approved_leaves = <?php echo $approvedLeaves; ?>;
-        let data_rejected_leaves = <?php echo $rejectedLeaves; ?>;
+
 
 
         var barChartData = {
@@ -36,21 +36,13 @@
             datasets: [{
                 label: 'All Leave Requests',
                 backgroundColor: "#f56954",
-                data: data_all_leaves
-            }, {
-                label: 'Approved Leaves',
-                backgroundColor: "#00a65a",
-                data: data_approved_leaves
-            }, {
-                label: 'Rejected Leaves',
-                backgroundColor: "#f39c12",
-                data: data_rejected_leaves
+                data: data_user_joined
             }]
         };
 
 
         window.onload = function() {
-            var ctx = document.getElementById("leaveBarChart").getContext("2d");
+            var ctx = document.getElementById("UserJoinedBarChart").getContext("2d");
             window.myBar = new Chart(ctx, {
                 type: 'bar',
                 data: barChartData,
@@ -66,7 +58,7 @@
                     maintainAspectRatio     : true,
                     title: {
                         display: true,
-                        text: 'Monthly Leave Status'
+                        text: 'Monthly Joined Status'
                     }
                 }
             });

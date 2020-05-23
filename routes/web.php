@@ -18,3 +18,5 @@ Route::get('/', function () {
 });
 
 Route::get('/chart', 'UserController@chart')->name('chart');
+
+Route::resource('user', 'UserController');

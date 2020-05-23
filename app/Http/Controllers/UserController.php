@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -13,7 +14,33 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users= User::all();
+        return view('index', compact('users'));
+    }
+
+    public function chart()
+    {
+        $userId = Auth::user()->user_id;
+
+        //or
+
+        $userId = Auth::user()->id;
+
+        // $userEmployee = Auth::user()->employee_id;
+        $userJoined = Auth::user()->created_at;
+
+
+        // All Joins
+        $user_joined = User::select(DB::raw("COUNT(created_at) as count"))
+        ->where('user_id', $userId)
+        ->whereYear('created_at', date('Y'))
+        ->orderBy(DB::raw("MONTH(created_at)"), 'ASC')
+        ->groupBy(DB::raw("MONTH(created_at)"))
+        ->get()->toArray();
+        $user_joined = array_column($user_joined, 'count');
+
+        return view('chart')
+            ->with('user_joined', json_encode($user_joined, JSON_NUMERIC_CHECK));
     }
 
     /**
