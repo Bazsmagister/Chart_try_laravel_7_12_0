@@ -65,3 +65,14 @@ doughnut
 bubble //didn't worked for me for some reason
 scatter //didn't worked for me for some reason
 polaArea
+
+# Problems
+
+ChartJs get data in array format.
+
+I faked datas from 2019 maj.
+So I don't had data from 2019. jan feb mar apr.
+
+I created a TECHNICAL user in every Month.
+
+If I have many users that 1 user doesn't matter. But helps to easier create data data need for an array that is used by the chart.
