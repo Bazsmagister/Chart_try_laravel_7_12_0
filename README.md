@@ -1,23 +1,24 @@
-# Mockery fail:
+## Mockery fail:
 
 cd into DIR
 
-run composer update
+> run composer update
 
-cp .env.example .env
+`cp .env.example .env`
+
 (Create a .env file. You can just make a copy of .env.example and rename the copy to .env. In
 case you try to start the dev server using php artisan serve and the app launches with a 500
 error, run these commands:)
 
-php artisan key:generate
+`php artisan key:generate`
 
-php artisan cache:clear
+`php artisan cache:clear`
 
-php artisan config:clear
+`php artisan config:clear`
 
-composer dump-autoload
+`composer dump-autoload`
 
-# Workflow
+## Workflow
 
 php artisan make:seeder UserSeeder
 "Seeder created succdesfully"
