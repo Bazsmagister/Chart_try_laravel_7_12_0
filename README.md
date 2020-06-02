@@ -1,20 +1,22 @@
-## Mockery fail:
+localhost:8000/chart
 
-cd into DIR
+Mockery fail just because my php was 7.2. I made an upgrade to 7.4 , so it is not anymore....:
 
-`run composer update`
+        <!-- cd into DIR
 
-`cp .env.example .env`
+        `run composer update`
 
-`php artisan key:generate`
+        `cp .env.example .env`
 
-If there are still problems try this:
+        `php artisan key:generate`
 
-`php artisan cache:clear`
+        If there are still problems try this:
 
-`php artisan config:clear`
+        `php artisan cache:clear`
 
-`composer dump-autoload`
+        `php artisan config:clear`
+
+        `composer dump-autoload` -->
 
 ## Workflow
 
@@ -111,3 +113,7 @@ VALUES ('TECHNICAL', 'nov@chart.com', now(), 'a', '46', '2019-11-01 08:00:00', N
 
 INSERT INTO users (name, email, email_verified_at, password, remember_token, created_at, updated_at )
 VALUES ('TECHNICAL', 'dec@chart.com', now(), 'a', '46', '2019-12-01 08:00:00', NOW());
+
+# I want to implement that every month that has not a created_at date, has a value of null in an array.
+
+wip:
