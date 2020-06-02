@@ -20,6 +20,6 @@ class UserSeeder extends Seeder
 
         ]);
 
-        factory(\App\User::class, 990)->create();
+        factory(\App\User::class, 9)->create();
     }
 }

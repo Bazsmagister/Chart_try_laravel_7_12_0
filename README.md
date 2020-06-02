@@ -1,4 +1,5 @@
 localhost:8000/chart
+https://carbon.nesbot.com/docs/
 
 Mockery fail just because my php was 7.2. I made an upgrade to 7.4 , so it is not anymore....:
 
@@ -117,3 +118,32 @@ VALUES ('TECHNICAL', 'dec@chart.com', now(), 'a', '46', '2019-12-01 08:00:00', N
 # I want to implement that every month that has not a created_at date, has a value of null in an array.
 
 wip:
+
+public function index()
+{
+$start = Carbon::today()->subDays(7);
+    $end = Carbon::yesterday();
+
+    $activities = Activity::where('member_id', Auth::user()->id)
+        ->where('created_at', '>=', Carbon::today()->subDays(7))
+        ->get(['bonus', DB::raw("DATE_FORMAT(created_at,'%Y-%m-%d') as date")])
+        ->pluck('bonus', 'date');
+
+    $dates = $this->generateDates($start, $end); // you fill zero valued dates
+
+    return $dates->merge($activities); // overwrite your bonuses with the zero values
+
+}
+
+public function generateDates(Carbon $startDate, Carbon $endDate, $format = 'Y-m-d')
+{
+    $dates = collect();
+$startDate = $startDate->copy();
+
+    for ($date = $startDate; $date->lte($endDate); $date->addDay()) {
+        $dates->put($date->format($format), 0);
+    }
+
+    return $dates;
+
+}
