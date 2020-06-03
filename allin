@@ -41,3 +41,10 @@
         // // $user_joined2019 = array_column($user_joined2019, 'count');
         // // dd($user_joined2019);
         // return view('chart', compact('user_joined2019'));
+
+
+
+  //let data_mergecombinedorigplusdates = <?php dump($mergecombinedorigplusdates); ?>;
+
+        //alert(data_mergecombinedorigplusdates);
+        //console.log(data_mergecombinedorigplusdates);

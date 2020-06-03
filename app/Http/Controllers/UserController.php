@@ -64,8 +64,8 @@ class UserController extends Controller
                         ->get()  //collection
                        ->pluck('time')
         ->toArray();
-        print_r($user_joined2020time);
-        dump($user_joined2020time);
+        //print_r($user_joined2020time);
+        //dump($user_joined2020time);
 
 
 
@@ -82,42 +82,44 @@ class UserController extends Controller
                        //->pluck('time')
         ->toArray();
 
-        print_r($user_joined2020);
-        dump($user_joined2020);
+        //print_r($user_joined2020);
+        //dump($user_joined2020);
 
         $user_joined2020 = array_column($user_joined2020, 'count');
 
-        print_r($user_joined2020);
-        dump($user_joined2020);
+        //print_r($user_joined2020);
+        //dump($user_joined2020);
 
         //join
         //https://stackoverflow.com/questions/1200885/php-merge-two-arrays-same-length-into-one-associative
 
 
         $combinedorig = array_combine($user_joined2020time, $user_joined2020);
-        print_r($combinedorig);
-        \dump($combinedorig);
+        //print_r($combinedorig);
+        //dump($combinedorig);
 
 
 
         $start = Carbon::create(2020, 1, 1, 0, 0, 0, 'Europe/Budapest');
-        $end = Carbon::create(2020, 06, 30, 23, 59, 59, 'Europe/Budapest');
+        $end = Carbon::create(2020, 05, 30, 23, 59, 59, 'Europe/Budapest');
 
         $dates = $this->generateDates($start, $end);
 
-        dump($dates);
+        //dump($dates);
 
         $datesToArray = $dates->toArray();
 
-        dump($datesToArray);
+        //dump($datesToArray);
 
         $mergecombinedorigplusdates = array_merge($datesToArray, $combinedorig); // overwrite your bonuses with the zero values
 
-        dump($mergecombinedorigplusdates);
+        //dump($mergecombinedorigplusdates);
 
-        // sort by date .
+        // sort by date .  it gives back bool :)
         ksort($mergecombinedorigplusdates);
-        dump($mergecombinedorigplusdates);
+        //dump($mergecombinedorigplusdates);
+
+        return view('chart', compact('mergecombinedorigplusdates'));
     }
 
     /**
