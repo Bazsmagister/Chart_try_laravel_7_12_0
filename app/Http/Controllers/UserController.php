@@ -24,20 +24,19 @@ class UserController extends Controller
         return view('index', compact('users'));
     }
 
+    //https://www.php.net/manual/en/function.date.php
 
-    public function generateDates(Carbon $startDate, Carbon $endDate, $format = 'Y-m-d')
+    public function generateDates(Carbon $startDate, Carbon $endDate, $format = 'Y-m-d h:i:s')
     {
         $dates = collect();
         $startDate = $startDate->copy();
 
-        for ($date = $startDate; $date->lte($endDate); $date->addMonth()) {     //addDay
+        for ($date = $startDate; $date->lte($endDate); $date->addDay()) {     //addDay
             $dates->put($date->format($format), 0);
         }
 
         return $dates;
     }
-
-
 
     public function chart()
     {
@@ -53,72 +52,72 @@ class UserController extends Controller
                         ->get('time')
                        ->pluck('time');
 
+        $user_joined2020time = DB::table('users')
+                     ->whereYear('created_at', '2020')
+                     ->selectRaw('COUNT(*) as count, created_at as time')
 
-        //->get();
+                      ->groupBy('time')
+                      ->orderBy('time')
+                     //  ->orderBy('created_at')
+                    //->get()->toArray();
+                        //->pluck('time', 'count')->toArray();
+                        ->get()  //collection
+                       ->pluck('time')
+        ->toArray();
+        print_r($user_joined2020time);
+        dump($user_joined2020time);
 
-        //->groupBy(DB::raw("MONTH(created_at)"))
-        //->orderBy(DB::raw("MONTH(created_at)"), 'ASC')
-        //  ->orderBy('created_at')
-        //           ->get()->toArray();
-        //->get();
-        // dd($user_joined2019);
-        //$user_joined2019 = array_column($user_joined2019, 'count');
 
-        $start = Carbon::create(2019, 1, 1, 0, 0, 0, 'Europe/Budapest');
-        $end = Carbon::create(2019, 12, 31, 23, 59, 59, 'Europe/Budapest');
 
+        $user_joined2020 = DB::table('users')
+                     ->whereYear('created_at', '2020')
+                     ->selectRaw('COUNT(*) as count, created_at as time')
+
+                      ->groupBy('time')
+                      ->orderBy('time')
+                     //  ->orderBy('created_at')
+                    //->get()->toArray();
+                        //->pluck('time', 'count')->toArray();
+                        ->get()  //collection
+                       //->pluck('time')
+        ->toArray();
+
+        print_r($user_joined2020);
+        dump($user_joined2020);
+
+        $user_joined2020 = array_column($user_joined2020, 'count');
+
+        print_r($user_joined2020);
+        dump($user_joined2020);
+
+        //join
+        //https://stackoverflow.com/questions/1200885/php-merge-two-arrays-same-length-into-one-associative
+
+
+        $combinedorig = array_combine($user_joined2020time, $user_joined2020);
+        print_r($combinedorig);
+        \dump($combinedorig);
+
+
+
+        $start = Carbon::create(2020, 1, 1, 0, 0, 0, 'Europe/Budapest');
+        $end = Carbon::create(2020, 06, 30, 23, 59, 59, 'Europe/Budapest');
 
         $dates = $this->generateDates($start, $end);
 
-        // dd($user_joined2019);
+        dump($dates);
 
-        $merged = $dates->merge($user_joined2019); // overwrite your bonuses with the zero values
+        $datesToArray = $dates->toArray();
 
-        dd($merged);
+        dump($datesToArray);
 
-        // dd($user_joined2019);
-        return view('chart')
-            //->with('user_joined2019', json_encode($user_joined2019, JSON_NUMERIC_CHECK))
-            //->with('dates', json_encode($dates, JSON_NUMERIC_CHECK));
-            ->with('merged', json_encode($merged, JSON_NUMERIC_CHECK));
+        $mergecombinedorigplusdates = array_merge($datesToArray, $combinedorig); // overwrite your bonuses with the zero values
 
-        ///////////////////////////////////////////////////////////////////////////////////
+        dump($mergecombinedorigplusdates);
 
-        //$start = Carbon::today()->subDays(7);
-
-        //$start = Carbon::today()->subDays(7);
-        $start = new Date("2019-01-01T00:00:01.001Z");
-        $start = new Date("2019-01-01T00:00:01.001Z");
-
-
-        $dtBudapest = Carbon::create(2012, 1, 1, 0, 0, 0, 'Europe/Budapest');
-        $dtLondon = Carbon::create(2012, 1, 1, 0, 0, 0, 'Europe/London');
-        echo $dtBudapest->diffInHours($dtLondon);
-
-
-        $mutable = Carbon::now();
-        $immutable = CarbonImmutable::now();
-        $modifiedMutable = $mutable->add(1, 'day');
-        $modifiedImmutable = CarbonImmutable::now()->add(1, 'day');
-
-
-        $end = Carbon::yesterday();
-
-
-        // $user_joined2019 = DB::table('users')
-        //              ->whereYear('created_at', '2019')
-        //             //  ->where('name', '<>', 'TECHNICAL')
-        //              ->select(DB::raw('COUNT(*) as count', 'created_at'))
-
-        //              ->groupBy(DB::raw("MONTH(created_at)"))
-        //              ->orderBy(DB::raw("MONTH(created_at)"), 'ASC')
-        //             //  ->orderBy('created_at')
-        //             //  ->get()->toArray();
-        // ->get();
-        // // dd($user_joined2019);
-        // // $user_joined2019 = array_column($user_joined2019, 'count');
-        // // dd($user_joined2019);
-        // return view('chart', compact('user_joined2019'));
+        // sort by date .
+        ksort($mergecombinedorigplusdates);
+        dump($mergecombinedorigplusdates);
     }
 
     /**
