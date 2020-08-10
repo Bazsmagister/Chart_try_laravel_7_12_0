@@ -25,7 +25,6 @@
         </div>
     </div>
 
-
     <script>
         //Assign php generated json to JavaScript variable
             let tempArray = <?php echo json_encode($mergecombinedorigplusdates); ?>;
@@ -40,24 +39,16 @@
            var countsGood = Object.values(tempArray);
            console.log(countsGood); //array
 
-
-
-
         // <?php
         // $php_array = array('abc','def','ghi');
         // $js_array = json_encode($php_array);
         // echo "var javascript_array = ". $js_array . ";\n";
         // ?>
 
-
         // counts  php array to js array:
         var countsfromphp = [<?php echo '"'.implode('","', $mergecombinedorigplusdates).'"' ?>];
         //console.log(countsfromphp);
         //alert(countsfromphp);
-
-
-
-
 
         var barChartData = {
             // labels:
@@ -111,12 +102,6 @@
 
         };
     </script>
-
-
-
-
-
-
 
 </body>
 

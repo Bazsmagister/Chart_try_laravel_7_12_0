@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 Route::get('/chart', 'UserController@chart')->name('chart');
 
-Route::resource('user', 'UserController');
+Route::resource('users', 'UserController');
 
 Auth::routes();
 
